@@ -1,0 +1,16 @@
+---
+- name: Update Windows
+  host: all
+  tasks:
+    - name: Search-only, return list of found updates (if any), log to c:\ansible_wu.txt
+      win_updates:
+       category_name SecurityUpdates
+        state: searched
+        log_path: c:\ansible_wu.txt
+  
+    - name: Install only particular updates based on the KB numbers
+      win_updates:
+       category_name: SecurityUpdates
+       whitelist:
+       - KB4565912
+       log_path: c:\ansible_wu_install.txt
